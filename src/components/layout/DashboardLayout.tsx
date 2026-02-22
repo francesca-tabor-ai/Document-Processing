@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard" },
@@ -69,6 +70,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         </header>
         <main className="flex-1 p-8">{children}</main>
       </div>
+      <ChatWidget />
     </div>
   );
 }

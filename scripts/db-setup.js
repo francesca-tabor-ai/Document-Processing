@@ -1,22 +1,22 @@
 /**
  * Create tables (schema) and load seed data.
  * Usage: node scripts/db-setup.js [--seed-only]
- * Requires DATABASE_URL (set in .env.local or environment).
+ * Requires DATABASE_URL or DATABASE_PUBLIC_URL (set in .env.local or environment).
  */
 const { Pool } = require("pg");
 const fs = require("fs");
 const path = require("path");
 
-// Load .env.local so DATABASE_URL is set when running locally
+// Load .env.local so database URL is set when running locally
 try {
   require("dotenv").config({ path: path.join(__dirname, "..", ".env.local") });
 } catch {
   // dotenv optional
 }
 
-const DATABASE_URL = process.env.DATABASE_URL;
+const DATABASE_URL = process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL;
 if (!DATABASE_URL) {
-  console.error("DATABASE_URL is not set. Add it to .env.local or the environment.");
+  console.error("DATABASE_URL or DATABASE_PUBLIC_URL is not set. Add one to .env.local or the environment.");
   process.exit(1);
 }
 

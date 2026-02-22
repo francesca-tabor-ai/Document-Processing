@@ -1,6 +1,6 @@
 import { Pool, PoolClient, QueryResultRow } from "pg";
 
-const env = process.env.DATABASE_URL;
+const env = process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL;
 
 /** Lazy-initialized pool for Postgres (safe for Next.js serverless). */
 let pool: Pool | null = null;
@@ -8,7 +8,7 @@ let pool: Pool | null = null;
 function getPool(): Pool {
   if (!env) {
     throw new Error(
-      "DATABASE_URL is not set. Add a Postgres service in Railway or set DATABASE_URL locally."
+      "DATABASE_URL or DATABASE_PUBLIC_URL is not set. Add a Postgres service in Railway or set one of these locally."
     );
   }
   if (!pool) {
