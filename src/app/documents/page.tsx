@@ -11,16 +11,26 @@ const ALLOWED_TYPES =
 const MAX_SIZE_MB = 50;
 const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 
-const MOCK_DOCS = [
-  { id: "1", name: "Contract_NDA_2024.pdf", type: "PDF", uploadedAt: "2024-02-20", owner: "You", status: "Processed" as const },
-  { id: "2", name: "Q3_Financials.xlsx", type: "Excel", uploadedAt: "2024-02-19", owner: "You", status: "Pending review" as const },
-  { id: "3", name: "Pitchbook_Acme.pptx", type: "PPT", uploadedAt: "2024-02-18", owner: "You", status: "Processing" as const },
+type DocStatus = "Processed" | "Pending review" | "Processing" | "Queued";
+type DocumentItem = {
+  id: string;
+  name: string;
+  type: string;
+  uploadedAt: string;
+  owner: string;
+  status: DocStatus;
+};
+
+const MOCK_DOCS: DocumentItem[] = [
+  { id: "1", name: "Contract_NDA_2024.pdf", type: "PDF", uploadedAt: "2024-02-20", owner: "You", status: "Processed" },
+  { id: "2", name: "Q3_Financials.xlsx", type: "Excel", uploadedAt: "2024-02-19", owner: "You", status: "Pending review" },
+  { id: "3", name: "Pitchbook_Acme.pptx", type: "PPT", uploadedAt: "2024-02-18", owner: "You", status: "Processing" },
 ];
 
 export default function DocumentsPage() {
   const [dragActive, setDragActive] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
-  const [fileList, setFileList] = React.useState<typeof MOCK_DOCS>(MOCK_DOCS);
+  const [fileList, setFileList] = React.useState<DocumentItem[]>(MOCK_DOCS);
 
   const validateFile = (file: File): string | null => {
     if (file.size > MAX_SIZE_BYTES) {
@@ -51,7 +61,7 @@ export default function DocumentsPage() {
       type: (f.name.split(".").pop() ?? "").toUpperCase(),
       uploadedAt: new Date().toISOString().slice(0, 10),
       owner: "You",
-      status: "Queued" as const,
+      status: "Queued",
     }));
     setFileList((prev) => [...toAdd, ...prev]);
   }, []);
