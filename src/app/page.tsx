@@ -75,7 +75,7 @@ export default function Home() {
             Strong typographic hierarchy, rounded components, and a calm palette
             keep the focus on your data and workflows.
           </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="stagger-children grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 title: "Document intelligence",
@@ -98,7 +98,7 @@ export default function Home() {
             ].map((card) => (
               <article
                 key={card.title}
-                className="card p-6 hover:shadow-medium"
+                className="card p-6"
               >
                 <p className="text-sm font-medium text-grey-500">{card.label}</p>
                 <p className="mt-1 font-semibold tabular-nums text-primary">

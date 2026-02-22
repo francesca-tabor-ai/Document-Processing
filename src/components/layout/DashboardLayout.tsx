@@ -1,9 +1,14 @@
 "use client";
 
 import * as React from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChatWidget } from "@/components/chat/ChatWidget";
+
+const ChatWidget = dynamic(
+  () => import("@/components/chat/ChatWidget").then((m) => ({ default: m.ChatWidget })),
+  { ssr: false }
+);
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard" },
@@ -33,7 +38,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`block rounded-lg px-3 py-2 text-sm font-medium transition-smooth ${
+                data-active={isActive || undefined}
+                className={`nav-link-hover block rounded-lg px-3 py-2 text-sm font-medium transition-smooth ${
                   isActive
                     ? "bg-grey-100 text-primary"
                     : "text-grey-600 hover:bg-grey-50 hover:text-primary"
@@ -47,7 +53,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         <div className="border-t border-grey-200 p-4">
           <Link
             href="/profile"
-            className="block rounded-lg px-3 py-2 text-sm text-grey-600 transition-smooth hover:bg-grey-50 hover:text-primary"
+            data-active={pathname === "/profile" || pathname?.startsWith("/profile/") || undefined}
+            className="nav-link-hover block rounded-lg px-3 py-2 text-sm text-grey-600 transition-smooth hover:bg-grey-50 hover:text-primary"
           >
             Profile
           </Link>
@@ -68,7 +75,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
         </header>
-        <main className="flex-1 p-8">{children}</main>
+        <main className="animate-fade-in flex-1 p-8">{children}</main>
       </div>
       <ChatWidget />
     </div>

@@ -9,7 +9,7 @@ export default function DashboardPage() {
       <p className="mb-8 text-grey-600">
         Key metrics and document processing overview.
       </p>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="stagger-children grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { label: "Documents processed", value: "1,247", trend: "+12%" },
           { label: "Pending review", value: "23", trend: "3 high" },

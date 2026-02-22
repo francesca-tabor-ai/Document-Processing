@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -26,7 +27,10 @@ export default function RootLayout({
     <html lang="en" className={sourceSans.variable}>
       <body className="min-h-screen font-sans antialiased">
         <ThemeProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <ScrollToTop />
+            {children}
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

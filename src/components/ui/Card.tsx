@@ -7,7 +7,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 export function Card({ className = "", children, ...props }: CardProps) {
   return (
     <div
-      className={`rounded-xl border border-grey-200 bg-white shadow-soft transition-shadow duration-200 hover:shadow-medium ${className}`}
+      className={`hover-lift rounded-xl border border-grey-200 bg-white shadow-soft ${className}`}
       {...props}
     >
       {children}
