@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Design tokens (OptiFlowAI) --- */
+:root {
+  /* Primary text: near-black */
+  --color-primary: #0c0c0c;
+  /* Background */
+  --color-background: #ffffff;
+  /* Cool greys */
+  --color-grey-50: #f8f9fa;
+  --color-grey-100: #f1f3f5;
+  --color-grey-200: #e9ecef;
+  --color-grey-300: #dee2e6;
+  --color-grey-400: #ced4da;
+  --color-grey-500: #adb5bd;
+  --color-grey-600: #868e96;
+  --color-grey-700: #495057;
+  --color-grey-800: #343a40;
+  --color-grey-900: #212529;
+  /* Signature gradient (purples, blues, pinks, oranges) */
+  --gradient-signature: linear-gradient(
+    135deg,
+    #7c3aed 0%,
+    #2563eb 25%,
+    #db2777 50%,
+    #ea580c 100%
+  );
+  /* Typography */
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --line-height-body: 1.625;
+  --line-height-heading: 1.25;
+  /* Spacing & radii */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  /* Motion */
+  --transition-default: 200ms ease;
+}
+
+@layer base {
+  /* Humanist sans-serif: high legibility, soft curves + precise geometry */
+  html {
+    @apply antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  body {
+    @apply bg-background text-primary font-sans;
+    line-height: var(--line-height-body);
+    font-weight: 400;
+  }
+
+  /* Headlines: large, bold, confident, sentence-case friendly */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold text-primary;
+    line-height: var(--line-height-heading);
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+
+  /* Body: regular/light, generous line height */
+  p {
+    @apply text-grey-800;
+    line-height: var(--line-height-body);
+  }
+
+  /* UI & numbers: clear, neutral, data-readable */
+  .font-mono,
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Secondary / muted text */
+  .text-muted {
+    @apply text-grey-600;
+  }
+
+  /* Dividers use cool grey */
+  hr {
+    @apply border-grey-200;
+  }
+}
+
+@layer components {
+  /* Rounded UI components; accents guide, don't overwhelm */
+  .card {
+    @apply rounded-lg bg-white border border-grey-200 shadow-soft;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md font-medium transition-[color,background-color,box-shadow] duration-200 focus:outline-none focus:ring-2 focus:ring-grey-300 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white hover:opacity-90;
+  }
+
+  .btn-secondary {
+    @apply btn bg-grey-100 text-primary hover:bg-grey-200;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-grey-700 hover:bg-grey-100;
+  }
+
+  /* Signature gradient — use sparingly for hero, highlights */
+  .gradient-signature {
+    background: var(--gradient-signature);
+  }
+
+  .gradient-text {
+    background: var(--gradient-signature);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
