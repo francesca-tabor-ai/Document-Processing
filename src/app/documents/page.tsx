@@ -79,6 +79,35 @@ export default function DocumentsPage() {
 
   const onDragLeave = () => setDragActive(false);
 
+  const exportList = React.useCallback((format: "csv" | "json") => {
+    if (format === "csv") {
+      const headers = ["Name", "Type", "Uploaded", "Owner", "Status"];
+      const rows = fileList.map((d) =>
+        [d.name, d.type, d.uploadedAt, d.owner, d.status]
+          .map((cell) => (/\n|,|"/.test(String(cell)) ? `"${String(cell).replace(/"/g, '""')}"` : cell))
+          .join(",")
+      );
+      const csv = [headers.join(","), ...rows].join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `document-library-${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } else {
+      const blob = new Blob([JSON.stringify(fileList, null, 2)], {
+        type: "application/json;charset=utf-8;",
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `document-library-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  }, [fileList]);
+
   return (
     <DashboardLayout>
       <h1 className="mb-2 text-2xl font-bold text-primary">Documents</h1>
@@ -119,9 +148,14 @@ export default function DocumentsPage() {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <h2 className="text-lg font-semibold text-primary">Document library</h2>
-          <Button variant="secondary" size="sm">
-            Export list
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="secondary" size="sm" onClick={() => exportList("csv")}>
+              Export CSV
+            </Button>
+            <Button variant="secondary" size="sm" onClick={() => exportList("json")}>
+              Export JSON
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">

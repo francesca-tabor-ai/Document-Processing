@@ -12,7 +12,7 @@ export default function Home() {
               <a href="#" className="hover:text-primary transition-colors">
                 Product
               </a>
-              <a href="#" className="hover:text-primary transition-colors">
+              <a href="/docs" className="hover:text-primary transition-colors">
                 Docs
               </a>
               <a href="/dashboard" className="hover:text-primary transition-colors">
@@ -52,7 +52,7 @@ export default function Home() {
                 Start free trial
               </a>
               <a
-                href="#"
+                href="/docs"
                 className="btn-secondary rounded-lg px-6 py-3 text-base"
               >
                 View documentation

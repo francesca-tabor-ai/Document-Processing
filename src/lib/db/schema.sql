@@ -1,8 +1,9 @@
 -- OptiFlowAI database schema (reference implementation)
 -- Run against your PostgreSQL (or adapt for your DB).
+-- Idempotent: safe to run multiple times (CREATE IF NOT EXISTS).
 
 -- Users and roles
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   email VARCHAR(255) NOT NULL UNIQUE,
   name VARCHAR(255),
@@ -11,13 +12,13 @@ CREATE TABLE users (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE teams (
+CREATE TABLE IF NOT EXISTS teams (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name VARCHAR(255) NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE permissions (
+CREATE TABLE IF NOT EXISTS permissions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES users(id) ON DELETE CASCADE,
   team_id UUID REFERENCES teams(id) ON DELETE CASCADE,
@@ -27,7 +28,7 @@ CREATE TABLE permissions (
 );
 
 -- Documents
-CREATE TABLE documents (
+CREATE TABLE IF NOT EXISTS documents (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name VARCHAR(500) NOT NULL,
   file_type VARCHAR(50) NOT NULL,
@@ -38,7 +39,7 @@ CREATE TABLE documents (
   status VARCHAR(50) NOT NULL DEFAULT 'uploaded'
 );
 
-CREATE TABLE document_classifications (
+CREATE TABLE IF NOT EXISTS document_classifications (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   document_id UUID NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
   classification_type VARCHAR(200) NOT NULL,
@@ -46,7 +47,7 @@ CREATE TABLE document_classifications (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE document_summaries (
+CREATE TABLE IF NOT EXISTS document_summaries (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   document_id UUID NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
   summary_type VARCHAR(100) NOT NULL,
@@ -54,7 +55,7 @@ CREATE TABLE document_summaries (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE extracted_data (
+CREATE TABLE IF NOT EXISTS extracted_data (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   document_id UUID NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
   field_name VARCHAR(200) NOT NULL,
@@ -64,7 +65,7 @@ CREATE TABLE extracted_data (
 );
 
 -- Audit
-CREATE TABLE audit_logs (
+CREATE TABLE IF NOT EXISTS audit_logs (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES users(id),
   action VARCHAR(200) NOT NULL,
@@ -75,7 +76,7 @@ CREATE TABLE audit_logs (
 );
 
 -- Workflows
-CREATE TABLE workflows (
+CREATE TABLE IF NOT EXISTS workflows (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name VARCHAR(255) NOT NULL,
   definition JSONB NOT NULL,
@@ -83,7 +84,7 @@ CREATE TABLE workflows (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE workflow_executions (
+CREATE TABLE IF NOT EXISTS workflow_executions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   workflow_id UUID NOT NULL REFERENCES workflows(id) ON DELETE CASCADE,
   document_id UUID REFERENCES documents(id),
@@ -93,7 +94,7 @@ CREATE TABLE workflow_executions (
 );
 
 -- Indexes
-CREATE INDEX idx_documents_owner ON documents(owner_id);
-CREATE INDEX idx_documents_uploaded_at ON documents(uploaded_at);
-CREATE INDEX idx_audit_logs_created_at ON audit_logs(created_at);
-CREATE INDEX idx_audit_logs_user ON audit_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_documents_owner ON documents(owner_id);
+CREATE INDEX IF NOT EXISTS idx_documents_uploaded_at ON documents(uploaded_at);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_created_at ON audit_logs(created_at);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_user ON audit_logs(user_id);
