@@ -55,13 +55,13 @@ export default function DocumentsPage() {
       }
     }
     // Simulate add to list
-    const toAdd = Array.from(files).map((f, idx) => ({
+    const toAdd: DocumentItem[] = Array.from(files).map((f, idx) => ({
       id: `new-${Date.now()}-${idx}`,
       name: f.name,
       type: (f.name.split(".").pop() ?? "").toUpperCase(),
       uploadedAt: new Date().toISOString().slice(0, 10),
       owner: "You",
-      status: "Queued",
+      status: "Queued" as DocStatus,
     }));
     setFileList((prev) => [...toAdd, ...prev]);
   }, []);
