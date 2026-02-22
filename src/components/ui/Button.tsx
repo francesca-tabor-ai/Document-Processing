@@ -19,9 +19,9 @@ const variantClasses: Record<ButtonVariant, string> = {
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "px-3 py-1.5 text-sm rounded-md",
-  md: "px-4 py-2 text-sm rounded-md",
-  lg: "px-6 py-3 text-base rounded-lg",
+  sm: "px-3 py-1.5 text-sm rounded-lg",
+  md: "px-4 py-2 text-sm rounded-lg",
+  lg: "px-6 py-3 text-base rounded-xl",
 };
 
 export function Button({
@@ -34,7 +34,7 @@ export function Button({
   return (
     <button
       type="button"
-      className={`inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-grey-300 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+      className={`inline-flex items-center justify-center font-medium transition-all duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       {...props}
     >
       {children}

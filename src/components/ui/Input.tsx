@@ -23,7 +23,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           id={inputId}
-          className={`w-full rounded-md border border-grey-300 bg-white px-3 py-2 text-primary placeholder:text-grey-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-grey-300 focus:ring-offset-1 disabled:bg-grey-100 disabled:text-grey-500 ${error ? "border-red-500 focus:border-red-500 focus:ring-red-200" : ""} ${className}`}
+          className={`w-full rounded-lg border border-grey-300 bg-white px-3 py-2 text-primary placeholder:text-grey-400 transition-smooth focus:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:bg-grey-100 disabled:text-grey-500 ${error ? "border-red-500 focus:border-red-500 focus-visible:ring-red-200/50" : ""} ${className}`}
           aria-invalid={error ? "true" : undefined}
           aria-describedby={error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined}
           {...props}

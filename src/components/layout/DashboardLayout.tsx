@@ -32,7 +32,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`block rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                className={`block rounded-lg px-3 py-2 text-sm font-medium transition-smooth ${
                   isActive
                     ? "bg-grey-100 text-primary"
                     : "text-grey-600 hover:bg-grey-50 hover:text-primary"
@@ -46,7 +46,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         <div className="border-t border-grey-200 p-4">
           <Link
             href="/profile"
-            className="block rounded-md px-3 py-2 text-sm text-grey-600 hover:bg-grey-50 hover:text-primary"
+            className="block rounded-lg px-3 py-2 text-sm text-grey-600 transition-smooth hover:bg-grey-50 hover:text-primary"
           >
             Profile
           </Link>

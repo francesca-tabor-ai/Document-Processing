@@ -36,10 +36,10 @@ export default function Home() {
             <p className="mb-4 text-sm font-medium uppercase tracking-wider text-grey-500">
               Intelligent document processing
             </p>
-            <h1 className="mb-6 text-4xl font-bold leading-tight text-primary md:text-5xl lg:text-6xl">
+            <h1 className="mb-6 text-4xl font-bold leading-tight text-primary md:text-5xl lg:text-6xl tracking-tight">
               Speed, clarity, and control for document-heavy workflows.
             </h1>
-            <p className="mb-10 max-w-2xl text-lg text-grey-700 leading-relaxed">
+            <p className="mb-10 max-w-2xl text-lg font-normal text-grey-700 leading-relaxed">
               Classify, summarize, and extract from contracts and financial
               documents with AI—then review, override, and approve with full
               audit trails. Serious infrastructure, without the intimidation.
@@ -59,16 +59,16 @@ export default function Home() {
               </a>
             </div>
           </div>
-          {/* Gradient strip — accent, doesn't overwhelm */}
+          {/* Gradient strip — accent only; subtle motion */}
           <div
-            className="mt-22 h-1.5 w-full max-w-md rounded-full bg-gradient-signature opacity-90"
+            className="mt-22 h-1.5 w-full max-w-md rounded-full bg-gradient-signature opacity-90 transition-smooth"
             aria-hidden
           />
         </section>
 
         {/* UI showcase: cards, typography hierarchy, cool greys */}
         <section className="border-t border-grey-200 py-22">
-          <h2 className="mb-3 text-2xl font-bold text-primary md:text-3xl">
+          <h2 className="mb-3 text-2xl font-bold tracking-tight text-primary md:text-3xl">
             Built for developers and compliance teams.
           </h2>
           <p className="mb-12 max-w-2xl text-grey-600 leading-relaxed">
@@ -98,7 +98,7 @@ export default function Home() {
             ].map((card) => (
               <article
                 key={card.title}
-                className="card p-6 transition-shadow hover:shadow-medium"
+                className="card p-6 hover:shadow-medium"
               >
                 <p className="text-sm font-medium text-grey-500">{card.label}</p>
                 <p className="mt-1 font-semibold tabular-nums text-primary">
@@ -115,7 +115,7 @@ export default function Home() {
 
         {/* Subtle gradient background block — expressive but minimal */}
         <section className="rounded-2xl bg-gradient-signature-soft py-22 px-8 md:py-30 md:px-16">
-          <h2 className="mb-4 text-2xl font-bold text-primary md:text-3xl">
+          <h2 className="mb-4 text-2xl font-bold tracking-tight text-primary md:text-3xl">
             One platform. Documents and intelligence together.
           </h2>
           <p className="max-w-2xl text-grey-700 leading-relaxed">

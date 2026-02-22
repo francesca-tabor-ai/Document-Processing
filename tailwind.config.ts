@@ -70,6 +70,16 @@ const config: Config = {
       transitionDuration: {
         DEFAULT: "200ms",
       },
+      transitionTimingFunction: {
+        DEFAULT: "cubic-bezier(0.4, 0, 0.2, 1)",
+      },
+      fontWeight: {
+        light: "300",
+        normal: "400",
+        medium: "500",
+        semibold: "600",
+        bold: "700",
+      },
     },
   },
   plugins: [],
