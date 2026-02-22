@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -22,7 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={sourceSans.variable}>
-      <body className="min-h-screen font-sans">{children}</body>
+      <body className="min-h-screen font-sans antialiased">
+        <ThemeProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

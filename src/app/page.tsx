@@ -15,11 +15,11 @@ export default function Home() {
               <a href="#" className="hover:text-primary transition-colors">
                 Docs
               </a>
-              <a href="#" className="hover:text-primary transition-colors">
+              <a href="/dashboard" className="hover:text-primary transition-colors">
                 Sign in
               </a>
               <a
-                href="#"
+                href="/dashboard"
                 className="btn-primary rounded-md px-4 py-2 text-sm"
               >
                 Get started
