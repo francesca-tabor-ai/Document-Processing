@@ -32,11 +32,11 @@
 - [ ] Create AI results caching and storage
 
 ## Document Intelligence Results Page
-- [ ] Display document classification with confidence score
-- [ ] Show AI-generated summary (short/detailed toggle)
-- [ ] Display extracted structured data in organized format
+- [x] Display document classification with confidence score
+- [x] Show AI-generated summary (short/detailed toggle)
+- [x] Display extracted structured data in organized format
 - [ ] Show risk flags and severity indicators
-- [ ] Add export capabilities (PDF, JSON, CSV)
+- [x] Add export capabilities (PDF, JSON, CSV)
 - [ ] Implement manual override for classifications
 
 ## Human Review Interface

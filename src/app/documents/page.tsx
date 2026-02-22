@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Card, CardContent, CardHeader } from "@/components/ui";
 import { Button } from "@/components/ui/Button";
@@ -167,6 +168,7 @@ export default function DocumentsPage() {
                   <th className="pb-3 font-medium">Uploaded</th>
                   <th className="pb-3 font-medium">Owner</th>
                   <th className="pb-3 font-medium">Status</th>
+                  <th className="pb-3 font-medium text-right">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -191,6 +193,14 @@ export default function DocumentsPage() {
                       >
                         {doc.status}
                       </Badge>
+                    </td>
+                    <td className="py-3 text-right">
+                      <Link
+                        href={`/documents/${doc.id}`}
+                        className="text-sm font-medium text-primary underline-offset-2 hover:underline"
+                      >
+                        View Intelligence
+                      </Link>
                     </td>
                   </tr>
                 ))}
