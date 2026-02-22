@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS permissions (
 CREATE TABLE IF NOT EXISTS documents (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name VARCHAR(500) NOT NULL,
-  file_type VARCHAR(50) NOT NULL,
+  file_type VARCHAR(200) NOT NULL,
   s3_key VARCHAR(1024) NOT NULL,
   size_bytes BIGINT,
   owner_id UUID NOT NULL REFERENCES users(id),
@@ -92,6 +92,9 @@ CREATE TABLE IF NOT EXISTS workflow_executions (
   started_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   completed_at TIMESTAMPTZ
 );
+
+-- Fix file_type length for long MIME types (e.g. xlsx)
+ALTER TABLE documents ALTER COLUMN file_type TYPE VARCHAR(200);
 
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_documents_owner ON documents(owner_id);

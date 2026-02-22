@@ -28,10 +28,12 @@ const schemaPath = path.join(projectRoot, "src", "lib", "db", "schema.sql");
 const seedPath = path.join(projectRoot, "src", "lib", "db", "seed.sql");
 
 function splitStatements(content) {
+  const hasExecutableSql = (s) =>
+    /\b(CREATE|INSERT|ALTER|DROP)\s/i.test(s);
   return content
     .split(/;\s*\n/)
     .map((s) => s.trim())
-    .filter((s) => s.length > 0 && !s.startsWith("--"));
+    .filter((s) => s.length > 0 && hasExecutableSql(s));
 }
 
 async function runFile(pool, filePath, label) {
