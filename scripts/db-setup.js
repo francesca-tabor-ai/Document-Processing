@@ -1,6 +1,9 @@
 /**
- * Create tables (schema) and load seed data.
- * Usage: node scripts/db-setup.js [--seed-only]
+ * Create tables (schema) and optionally load seed data.
+ * Usage:
+ *   node scripts/db-setup.js           — schema + seed
+ *   node scripts/db-setup.js --schema-only — create tables only
+ *   node scripts/db-setup.js --seed-only   — run seed only (tables must exist)
  * Requires DATABASE_URL or DATABASE_PUBLIC_URL (set in .env.local or environment).
  */
 const { Pool } = require("pg");
@@ -49,13 +52,16 @@ async function runFile(pool, filePath, label) {
 
 async function main() {
   const seedOnly = process.argv.includes("--seed-only");
+  const schemaOnly = process.argv.includes("--schema-only");
   const pool = new Pool({ connectionString: DATABASE_URL });
 
   try {
     if (!seedOnly) {
       await runFile(pool, schemaPath, "Schema");
     }
-    await runFile(pool, seedPath, "Seed");
+    if (!schemaOnly) {
+      await runFile(pool, seedPath, "Seed");
+    }
     console.log("Done.");
   } catch (e) {
     process.exit(1);

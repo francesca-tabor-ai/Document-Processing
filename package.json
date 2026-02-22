@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "db:setup": "node scripts/db-setup.js",
+    "db:schema": "node scripts/db-setup.js --schema-only",
     "db:seed": "node scripts/db-setup.js --seed-only"
   },
   "dependencies": {

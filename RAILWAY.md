@@ -24,12 +24,14 @@ npm run db:setup
 
 This runs the schema (`src/lib/db/schema.sql`) and then the seed (`src/lib/db/seed.sql`). Seed includes demo users, teams, permissions, a sample document, and a workflow.
 
-**Option B – via Railway CLI:**
+**Option B – via Railway CLI (recommended):**
 
 ```bash
 railway link
 railway run npm run db:setup
 ```
+
+To create **tables only** (no seed data): `railway run npm run db:schema`
 
 **Option C – manually:** Run `src/lib/db/schema.sql` then `src/lib/db/seed.sql` in the Railway Postgres Query tab or with `psql`.
 
