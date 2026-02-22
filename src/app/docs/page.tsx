@@ -1,3 +1,5 @@
+import { MarketingHeader } from "@/components/layout/MarketingHeader";
+
 export const metadata = {
   title: "Documentation — OptiFlowAI",
   description:
@@ -7,39 +9,7 @@ export const metadata = {
 export default function DocsPage() {
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-grey-200 bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-5">
-          <nav className="flex items-center justify-between">
-            <a
-              href="/"
-              className="text-xl font-semibold text-primary hover:opacity-90 transition-opacity"
-            >
-              OptiFlowAI™
-            </a>
-            <div className="flex items-center gap-6 text-sm text-grey-600">
-              <a href="/" className="hover:text-primary transition-colors">
-                Product
-              </a>
-              <a
-                href="/docs"
-                className="font-medium text-primary"
-                aria-current="page"
-              >
-                Docs
-              </a>
-              <a href="/dashboard" className="hover:text-primary transition-colors">
-                Sign in
-              </a>
-              <a
-                href="/dashboard"
-                className="btn-primary rounded-md px-4 py-2 text-sm"
-              >
-                Get started
-              </a>
-            </div>
-          </nav>
-        </div>
-      </header>
+      <MarketingHeader />
 
       <main className="mx-auto max-w-4xl px-6 py-16">
         <div className="mb-16">
